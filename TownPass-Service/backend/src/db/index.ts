@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 import { drizzle } from "drizzle-orm/node-postgres";
-import pkg from 'pg';
+import pkg from "pg";
 
 dotenv.config();
 
