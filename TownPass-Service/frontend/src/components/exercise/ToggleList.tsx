@@ -12,6 +12,13 @@ import { courts, sports } from "@/data";
 import Court from "./Court";
 import CourtInfo from "./CourtInfo";
 import ExerciseRecommendationAssistant from "./RecommendAgent";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 function ToggleList() {
   const {
@@ -67,25 +74,22 @@ function ToggleList() {
     <>
       <div className="flex flex-col mb-2">
         <div className="w-full flex flex-row gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger className="w-full flex flex-row justify-between text-xl items-center">
-              {exercise || "運動一覽"}
-              <ChevronDown />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-72">
+          <Select onValueChange={handleSelectExercise} value={exercise}>
+            <SelectTrigger className="text-xl">
+              <SelectValue placeholder={exercise || "運動一覽"}/>
+            </SelectTrigger>
+            <SelectContent>
               {sports.map((sport, index) => (
-                <DropdownMenuItem
+                <SelectItem
                   key={index}
-                  className="text-xl hover:bg-gray-100 cursor-pointer"
-                  onClick={() =>
-                    handleSelectExercise(sport?.icon + " " + sport?.name)
-                  }
+                  value={sport.icon + " " + sport.name}
+                  className="text-xl"
                 >
-                  {sport?.icon} {sport?.name}
-                </DropdownMenuItem>
+                  {sport.icon + " " + sport.name}
+                </SelectItem>
               ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+            </SelectContent>
+          </Select>
           <button
             className="w-3/12 bg-[#5ab4c5] text-white p-1 text-base font-semibold"
             onClick={handleRecommendationClick}
